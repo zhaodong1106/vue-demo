@@ -21,7 +21,7 @@
                             <el-menu-item index="1-2">选项2</el-menu-item>
                         </el-menu-item-group>
                         <el-menu-item-group title="分组2">
-                            <el-menu-item index="1-3">选项3</el-menu-item>
+                            <el-menu-item index="addStore">添加店铺</el-menu-item>
                         </el-menu-item-group>
                         <el-submenu index="1-4">
                             <template slot="title">选项4</template>
@@ -43,6 +43,7 @@
                 </el-menu>
             </el-col>
             <el-col :span="20" style="height: 100%;overflow: auto;">
+                <headTop></headTop>
                 <keep-alive>
                     <router-view></router-view>
                 </keep-alive>
@@ -52,12 +53,16 @@
 </template>
 
 <script>
+    import headTop from '@/components/headTop'
     export default {
         computed: {
             defaultActive: function(){
                 return this.$route.path.replace('/', '');
             }
         },
+        components:{
+            headTop
+        }
     }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-row>
+        <el-row style="margin-top: 20px">
             <el-col :span="14" :offset="4">
                 <el-form :model="categoryForm" ref="categoryForm" label-width="110px" class="form">
                     <el-row class="category_select">
