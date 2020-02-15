@@ -5,9 +5,11 @@
 <!--			<el-breadcrumb-item :to="{ path: '/manage' }">首页</el-breadcrumb-item>-->
 <!--			<el-breadcrumb-item v-for="(item, index) in $route.meta" :key="index">{{item}}</el-breadcrumb-item>-->
 <!--		</el-breadcrumb>-->
-		<div>22222222222</div>
-		<el-dropdown menu-align='start'>33333333
-<!--			<img :src="baseImgPath + adminInfo.avatar" class="avator">-->
+		<div>2222222222332</div>
+		<el-dropdown >
+			<el-button type="primary">
+				更多菜单<i class="el-icon-arrow-down el-icon--right"></i>
+			</el-button>
 			<el-dropdown-menu slot="dropdown">
 				<el-dropdown-item >首页</el-dropdown-item>
 				<el-dropdown-item >退出</el-dropdown-item>

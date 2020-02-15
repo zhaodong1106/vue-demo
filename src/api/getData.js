@@ -61,12 +61,22 @@ export const adminDayCount = date => fetch('/statis/admin/' + date + '/count');
  */
 
 export const adminList = data => fetch('/admin/all', data);
+/**
+ * 用户列表
+ */
+
+export const userList = data => fetch('/search', data,'post');
+
+export const addUser = data => fetch('/regist', data,'get');
+
+export const userInfo = data => fetch('/getById', data,'get');
 
 /**
  * 管理员数量
  */
 
 export const adminCount = () => fetch('/admin/count');
+
 
 /**
  * 获取定位城市
@@ -116,7 +126,7 @@ export const addFood = data => fetch('/shopping/addfood', data, 'POST');
  * category 种类列表
  */
 
-export const foodCategory = (latitude, longitude) => fetch('/shopping/v2/restaurant/category');
+// export const foodCategory = (latitude, longitude) => fetch('/shopping/v2/restaurant/category');
 
 /**
  * 获取餐馆列表

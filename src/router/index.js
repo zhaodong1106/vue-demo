@@ -1,11 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+
 Vue.use(Router)
 
 const navMenu = r => require.ensure([], () => r(require('@/components/NavMenu')), 'NavMenu');
 const  addShop=r => require.ensure([], () => r(require('@/components/AddShop')), 'AddShop');
 const  addStore=r => require.ensure([], () => r(require('@/components/AddStore')), 'AddStore');
+const  userList=r => require.ensure([], () => r(require('@/components/user/UserList')), 'UserList');
+const  addUser=r => require.ensure([], () => r(require('@/components/user/AddUser')), 'AddUser');
 const routes = [
     {
         path:'/',
@@ -20,6 +23,16 @@ const routes = [
             {
                 path:'/addStore',
                 component:addStore,
+                meta: ['添加数据', '添加商铺']
+            },
+            {
+                path:'/userList',
+                component:userList,
+                meta: ['添加数据', '添加商铺']
+            },
+            {
+                path:'/addUser',
+                component:addUser,
                 meta: ['添加数据', '添加商铺']
             }
         ]

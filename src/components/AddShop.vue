@@ -20,7 +20,7 @@
                             <el-form-item label="食品种类" prop="name">
                                 <el-input v-model="categoryForm.name"></el-input>
                             </el-form-item>
-                            <el-form-item label="种类描述" prop="description">
+                            <el-form-item label="种类描述" prop="description" >
                                 <el-input v-model="categoryForm.description"></el-input>
                             </el-form-item>
                             <el-form-item>
@@ -45,7 +45,7 @@
         data: function(){
             return {
                 categoryForm: {
-                    categoryList:['222','打算打算'],
+                    categoryList:[{'value':1,'label':'dads'},{'value':2,'label':'打算打算'}],
                     categorySelect: '',
                     name: '',
                     description: ''

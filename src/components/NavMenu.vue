@@ -18,7 +18,8 @@
                         <el-menu-item-group>
                             <template slot="title">分组一</template>
                             <el-menu-item index="addShop">添加店铺</el-menu-item>
-                            <el-menu-item index="1-2">选项2</el-menu-item>
+                            <el-menu-item index="userList">用户列表</el-menu-item>
+                            <el-menu-item index="addUser">添加用户</el-menu-item>
                         </el-menu-item-group>
                         <el-menu-item-group title="分组2">
                             <el-menu-item index="addStore">添加店铺</el-menu-item>
@@ -44,9 +45,9 @@
             </el-col>
             <el-col :span="20" style="height: 100%;overflow: auto;">
                 <headTop></headTop>
-                <keep-alive>
+<!--                <keep-alive>-->
                     <router-view></router-view>
-                </keep-alive>
+<!--                </keep-alive>-->
             </el-col>
         </el-row>
     </div>
