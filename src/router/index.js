@@ -9,9 +9,15 @@ const  addShop=r => require.ensure([], () => r(require('@/components/AddShop')),
 const  addStore=r => require.ensure([], () => r(require('@/components/AddStore')), 'AddStore');
 const  userList=r => require.ensure([], () => r(require('@/components/user/UserList')), 'UserList');
 const  addUser=r => require.ensure([], () => r(require('@/components/user/AddUser')), 'AddUser');
+const  login=r => require.ensure([], () => r(require('@/components/Login')), 'Login');
 const routes = [
     {
-        path:'/',
+      path: '/login',
+      component: login,
+      name: 'login',
+    },
+    {
+        path:'/home',
         component:navMenu,
         name:'',
         children:[

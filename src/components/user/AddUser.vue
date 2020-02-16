@@ -70,7 +70,7 @@
                                     username: '',
                                     email: ''
                                 }
-                                this.$emit('refreshData')
+                                this.$emit('refreshData',1)
                             }else{
                                 this.$message({
                                     type: 'error',

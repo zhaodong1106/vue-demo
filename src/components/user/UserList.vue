@@ -1,7 +1,7 @@
 <template>
     <div class="table_container">
         <el-row>
-            <el-col :span="12" :offset="6">
+            <el-col :span="14" :offset="4">
                 <!-- Form -->
             <el-row type="flex" justify="space-between">
                     <div>
@@ -63,7 +63,7 @@
                         min-width="10%" align="center">
                     <template slot-scope="scope">
                         <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-                        <el-button type="text" size="small">编辑</el-button>
+                        <el-button @click="editClick(scope.row)"  type="text" size="small">编辑</el-button>
                     </template>
                 </el-table-column>
 
@@ -84,7 +84,7 @@
         </el-row>
 
 
-        <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+        <el-dialog :title="titleMap['addUser']" :visible.sync="dialogFormVisible">
             <addUser v-on:refreshData='refreshData'></addUser>
             <div slot="footer" class="dialog-footer">
                 <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -92,8 +92,8 @@
             </div>
         </el-dialog>
 
-        <el-dialog title="用户信息" :visible.sync="userInfoVisible">
-            <userInfo v-bind:id=id ref="userInfo"></userInfo>
+        <el-dialog :title="userTitle" :visible.sync="userInfoVisible">
+            <userInfo v-bind:id=id v-bind:currentPage=currentPage ref="userInfo" v-on:refreshData='refreshData'></userInfo>
             <div slot="footer" class="dialog-footer">
                 <el-button @click="userInfoVisible = false">取 消</el-button>
                 <el-button type="primary" @click="userInfoVisible = false">确 定</el-button>
@@ -122,7 +122,16 @@
                 searchDto:{
                     username:'',
                     email:''
-                }
+                },
+                titleMap:{
+                    addUser: '新增用户',
+                    updateUser: '修改用户'
+                },
+                userTitleMap:{
+                    userInfo: '用户详情',
+                    updateUser: '修改用户'
+                },
+                userTitle:''
             }
         },
         components:{addUser,userInfo},
@@ -134,29 +143,45 @@
                 // eslint-disable-next-line no-console
                 // console.log(row.id);
                 this.userInfoVisible = true;
+                this.userTitle='用户详情';
                 this.id=row.id;
                 // eslint-disable-next-line no-console
                 // console.log(this.$refs.userInfo)
                 setTimeout(()=>{
-                    this.$refs.userInfo.getInfo();
+                    this.$refs.userInfo.queryUserForQuery();
+                },10)
+
+
+            },
+            editClick(row){
+                // eslint-disable-next-line no-console
+                // console.log(row.id);
+                this.userInfoVisible = true;
+                this.id=row.id;
+                this.userTitle='修改用户';
+                // eslint-disable-next-line no-console
+                // console.log(this.$refs.userInfo)
+                setTimeout(()=>{
+                    this.$refs.userInfo.editUserForQuery();
                 },10)
 
 
             },
             search(){
                 // this.refreshData();
-                // this.getAdmin()
+                this.getAdmin()
                 // eslint-disable-next-line no-console
-                console.log(this.$refs.userInfo)
+                // console.log(this.$refs.userInfo)
             },
             resetForm(formName){
                 this.$refs[formName].resetFields();
             },
-            refreshData(){
-                this.dialogFormVisible=false;
-                this.currentPage=1;
+            refreshData(currentPage){
+                // eslint-disable-next-line no-console
+                console.log('主组件的页码:'+currentPage)
+                this.userInfoVisible=false;
                 this.limit=5;
-                this.getAdmin();
+                this.handleCurrentChange(currentPage);
             },
             handleCurrentChange(val) {
                 this.currentPage = val;

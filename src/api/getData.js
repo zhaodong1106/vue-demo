@@ -71,6 +71,7 @@ export const addUser = data => fetch('/regist', data,'get');
 
 export const userInfo = data => fetch('/getById', data,'get');
 
+export const editUser = data => fetch('/updateById', data,'get');
 /**
  * 管理员数量
  */
