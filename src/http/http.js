@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import whitelist from './whiteList'
+import whitelist from './whiteList'
 import {
     MessageBox
 } from 'element-ui'
@@ -12,9 +12,9 @@ const instance =axios.create({
 instance.defaults.baseURL='http://localhost:8080/api';
 instance.interceptors.request.use(
     config=>{
-        // if(config.url && whitelist.every(obj=>config.url.includes(obj))){
-        //     return config;
-        // }
+        if(config.url && whitelist.some(obj=>config.url.indexOf(obj)> -1)){
+            return config;
+        }
         let baseToken=localStorage.getItem('token');
         if(baseToken){
             config.headers['Authorization']='bearer '+baseToken;

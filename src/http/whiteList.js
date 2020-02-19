@@ -1,1 +1,1 @@
-export default ['regist', 'login']
+export default ['/user/regist','/user/login']

@@ -5,6 +5,7 @@ import Vuex from 'vuex'
 import Vue from 'vue'
 import * as types from './types'
 
+
 Vue.use(Vuex);
 export default new Vuex.Store({
 	state: {
@@ -14,7 +15,7 @@ export default new Vuex.Store({
 	},
 	mutations: {
 		[types.LOGIN]: (state, data) => {
-			localStorage.token = data;
+			localStorage.setItem('token',data);
 			state.token = data;
 		},
 		[types.LOGOUT]: (state) => {
