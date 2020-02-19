@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+//引入nprogress
+import NProgress from 'nprogress' // 进度条
+import 'nprogress/nprogress.css' //这个样式必须引入
 
 
 Vue.use(Router)
@@ -19,32 +22,56 @@ const routes = [
     {
         path:'/home',
         component:navMenu,
-        name:'',
+        name:'home',
+        meta: {
+            requireAuth: true
+        },
         children:[
             {
                 path:'/addShop',
                 component:addShop,
-                meta: ['添加数据', '添加商铺']
+                meta: {
+                    requireAuth: true
+                }
             },
             {
                 path:'/addStore',
                 component:addStore,
-                meta: ['添加数据', '添加商铺']
+                meta: {
+                    requireAuth: true
+                }
             },
             {
                 path:'/userList',
                 component:userList,
-                meta: ['添加数据', '添加商铺']
+                meta: {
+                    requireAuth: true
+                }
             },
             {
                 path:'/addUser',
                 component:addUser,
-                meta: ['添加数据', '添加商铺']
+                meta: {
+                    requireAuth: true
+                }
             }
         ]
     }
 ]
-export default new Router({
-    routes,
-    strict: process.env.NODE_ENV !== 'production',
+let router = new Router({routes: routes});
+router.beforeEach(((to, from, next) => {
+    NProgress.start()
+    if (to.matched.some(res => res.meta.requireAuth)){
+        if(localStorage.getItem('token')){
+            next()
+        }else {
+            next({path: '/login'})
+        }
+    } else {
+        next()
+    }
+}))
+router.afterEach(() => {
+    NProgress.done()
 })
+export  default  router;
