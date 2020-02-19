@@ -1,38 +1,28 @@
-import Vue from 'vue'
+/**
+ * Created by superman on 17/2/16.
+ */
 import Vuex from 'vuex'
-import {getAdminInfo} from '@/api/getData'
+import Vue from 'vue'
+import * as types from './types'
 
-Vue.use(Vuex)
-
-const state = {
-	adminInfo: {
-		avatar: 'default.jpg'
+Vue.use(Vuex);
+export default new Vuex.Store({
+	state: {
+		user: {},
+		token: null,
+		title: ''
 	},
-}
-
-const mutations = {
-	saveAdminInfo(state, adminInfo){
-		state.adminInfo = adminInfo;
-	}
-}
-
-const actions = {
-	async getAdminData({commit}){
-		try{
-			const res = await getAdminInfo()
-			if (res.status == 1) {
-				commit('saveAdminInfo', res.data);
-			}else{
-				throw new Error(res.type)
-			}
-		}catch(err){
-			// console.log(err.message)
+	mutations: {
+		[types.LOGIN]: (state, data) => {
+			localStorage.token = data;
+			state.token = data;
+		},
+		[types.LOGOUT]: (state) => {
+			localStorage.removeItem('token');
+			state.token = null
+		},
+		[types.TITLE]: (state, data) => {
+			state.title = data;
 		}
 	}
-}
-
-export default new Vuex.Store({
-	state,
-	actions,
-	mutations,
 })

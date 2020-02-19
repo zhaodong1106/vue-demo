@@ -4,7 +4,7 @@ import fetch from '@/config/fetch'
  * 登陆
  */
 
-export const login = data => fetch('/admin/login', data, 'POST');
+// export const login = data => fetch('/admin/login', data, 'POST');
 
 /**
  * 退出
@@ -65,13 +65,15 @@ export const adminList = data => fetch('/admin/all', data);
  * 用户列表
  */
 
-export const userList = data => fetch('/search', data,'post');
+export const userList = data => fetch('/api/search', data,'post');
 
-export const addUser = data => fetch('/regist', data,'get');
+export const addUser = data => fetch('/api/user/regist', data,'get');
 
-export const userInfo = data => fetch('/getById', data,'get');
+export const userInfo = data => fetch('/api/getById', data,'get');
 
-export const editUser = data => fetch('/updateById', data,'get');
+export const editUser = data => fetch('/api/updateById', data,'get');
+
+export const login = data => fetch('/api/login', data,'get');
 /**
  * 管理员数量
  */

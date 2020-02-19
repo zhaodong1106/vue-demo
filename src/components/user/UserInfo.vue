@@ -39,7 +39,8 @@
 </template>
 
 <script>
-    import {addUser, userInfo,editUser} from '@/api/getData';
+    // import {addUser, userInfo,editUser} from '@/api/getData';
+    import userApi from '@/api/user/index';
     import {validateEMail} from "@/utils/validator";
     export default {
         name: "userInfo",
@@ -71,31 +72,30 @@
             // this.getInfo()
         },
         methods:{
-            async getInfo() {
+             getInfo() {
                 // eslint-disable-next-line no-console
                 console.log(this.id)
-                const result = await userInfo({id:this.id});
-                if (result.code == 200) {
-                    this.userForm.username=result.data.name;
-                    this.userForm.email=result.data.email;
-                    this.userForm.createTime=result.data.createTime;
-                    this.userForm.updateTime=result.data.updateTime;
-                } else {
-                    this.$message({
-                        type: 'error',
-                        message: result.message
-                    });
-                }
+                userApi.getById({id:this.id}).then(res=>{
+                    if (res.data.code == 200) {
+                        this.userForm.username=res.data.data.name;
+                        this.userForm.email=res.data.data.email;
+                        this.userForm.createTime=res.data.data.createTime;
+                        this.userForm.updateTime=res.data.data.updateTime;
+                    } else {
+                        this.$message({
+                            type: 'error',
+                            message: res.data.message
+                        });
+                    }
+                }).catch(error=>{
+                    alert(error);
+                })
             },
             addUser:function (userForm) {
                 this.$refs[userForm].validate(async (valid) => {
                     if (valid) {
-                        // const params = {
-                        //     ...this.userForm
-                        // }
-                        try{
-                            const result = await addUser(this.userForm);
-                            if (result.code==200) {
+                            userApi.addUser(this.userForm).then(res=>{
+                            if (res.data.code==200) {
                                 this.$message({
                                     type: 'success',
                                     message: '添加成功'
@@ -111,12 +111,12 @@
                             }else{
                                 this.$message({
                                     type: 'error',
-                                    message: result.message
+                                    message: res.data.message
                                 });
-                            }
-                        }catch(err){
-                            alert(err)
-                        }
+                            }}).then(error=>{
+                                alert(error)
+                            })
+
                     } else {
                         this.$notify.error({
                             title: '错误',
@@ -138,12 +138,11 @@
                             email: this.userForm.email,
                             id: this.id
                         }
-                        try{
-                            const result = await editUser(editdata);
-                            if (result.code==200) {
+                       userApi.updateById(editdata).then(res=>{
+                            if (res.data.code==200) {
                                 this.$message({
                                     type: 'success',
-                                    message: '添加成功'
+                                    message: '修改成功'
                                 });
                                 this.userForm = {
                                     password: '',
@@ -156,12 +155,11 @@
                             }else{
                                 this.$message({
                                     type: 'error',
-                                    message: result.message
+                                    message: res.data.message
                                 });
-                            }
-                        }catch(err){
-                            alert(err)
-                        }
+                            }}).catch(error=>{
+                           alert(error)
+                       })
                     } else {
                         this.$notify.error({
                             title: '错误',

@@ -10,13 +10,13 @@ let baseUrl = '';
 let routerMode = 'hash';
 let baseImgPath;
 
-if (process.env.NODE_ENV == 'development') {
-	baseUrl = 'http://122.51.15.88:8001';
-    baseImgPath = '/img/';
-}else{
-	baseUrl = '//elm.cangdu.org';
-    baseImgPath = '//elm.cangdu.org/img/';
-}
+// if (process.env.NODE_ENV == 'development') {
+// 	baseUrl = 'http://122.51.15.88:8001';
+//     baseImgPath = '/img/';
+// }else{
+// 	baseUrl = '//elm.cangdu.org';
+//     baseImgPath = '//elm.cangdu.org/img/';
+// }
 
 export {
 	baseUrl,

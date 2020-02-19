@@ -104,7 +104,7 @@
 </template>
 
 <script>
-    import {userList} from '@/api/getData'
+    import  userApi from '@/api/user/index'
     import addUser from '@/components/user/AddUser'
     import userInfo from '@/components/user/UserInfo'
     export default {
@@ -187,29 +187,25 @@
                 this.currentPage = val;
                 this.getAdmin()
             },
-            async getAdmin(){
-                try{
-                    const res = await userList({pageNo: this.currentPage, pageSize: this.limit,name: this.searchDto.username,
-                    email:this.searchDto.email});
-                    if (res.total !=null) {
-                        this.count=res.total;
-                        this.tableData = [];
-                        res.data.forEach(item => {
-                            const tableItem = {
-                                id: item.id,
-                                create_time: item.createTime,
-                                user_name: item.name,
-                                update_time: item.updateTime,
-                                email: item.email,
-                            }
-                            this.tableData.push(tableItem)
-                        })
-                    }else{
-                        throw new Error(res.message)
-                    }
-                }catch(err){
-                    alert('获取数据失败', err);
-                }
+             getAdmin(){
+                    userApi.userList({pageNo: this.currentPage, pageSize: this.limit,name: this.searchDto.username,
+                    email:this.searchDto.email}).then(res=> {
+                        // if (res.total != null) {
+                            this.count = res.data.total;
+                            this.tableData = [];
+                            res.data.data.forEach(item => {
+                                const tableItem = {
+                                    id: item.id,
+                                    create_time: item.createTime,
+                                    user_name: item.name,
+                                    update_time: item.updateTime,
+                                    email: item.email,
+                                }
+                                this.tableData.push(tableItem)
+                            })
+
+                    })
+
             }
         }
     }

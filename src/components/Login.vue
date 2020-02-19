@@ -1,11 +1,11 @@
 <template>
     <div class="fillcontain">
-        <div style="display: flex;justify-content: center;align-items: center;height: 100%;background-color: #42b983">
+        <div class="bg" style="display: flex;justify-content: center;align-items: center;height: 100%;background-color: #42b983;">
             <div style="background-color: white;width: 400px;padding: 10px;">
                         <h2 style="text-align: center;padding: 10px">
                             后台管理系统
                         </h2>
-                        <el-form :model="loginForm" :rules="loginForm" ref="loginForm"  class="form" style="margin-top: 10px">
+                        <el-form :model="loginForm" :rules="loginFormRules" ref="loginForm"  class="form" style="margin-top: 10px">
                             <el-row class="add_category_row" >
                                 <div class="add_category">
                                     <el-form-item  prop="username"   >
@@ -29,6 +29,9 @@
 </template>
 
 <script>
+    // import {login} from "@/api/getData";
+    // import * as types from '@/store/types' ;
+    import  userApi from '@/api/user/index'
     export default {
         name: "Login",
         data:function() {
@@ -36,14 +39,63 @@
                 loginForm:{
                     username: '' ,
                     password: ''
+                },
+                loginFormRules:{
+                    username:[
+                        {required: true, message: '请输入用户名', trigger: 'blur' },
+                        { min: 3, max: 20, message: '长度在 3 到 20 个字符', trigger: 'blur' }
+                    ],
+                    password:[
+                        {required:true,message: '请输入密码', trigger: 'blur'},
+                        {min: 3, max: 20,message: '长度在 3 到 20 个字符',trigger: 'blur'}
+                    ]
                 }
             }
 
+        },
+        methods:{
+            login(loginForm){
+                this.$refs[loginForm].validate(async (valid) => {
+                    if (valid) {
+                            userApi.login(this.loginForm).then(res=>{
+                            if (res.data.accessTokenValue != null) {
+                                this.$message({
+                                    type: 'success',
+                                    message: '添加成功'
+                                });
+                                this.$store.commit('login',res.data.accessTokenValue );
+                                 this.$router.push({path: '/home'})
+
+                            }else{
+                                this.$message({
+                                    type: 'error',
+                                    message: res.data.message
+                                });
+                            }
+                            }).catch(error=>{
+                                alert(error)
+                            })
+                    } else {
+                        this.$notify.error({
+                            title: '错误',
+                            message: '请检查输入是否正确',
+                            offset: 100
+                        });
+                        return false;
+                    }
+                });
+            },
+
         }
+
 
     }
 </script>
 
 <style scoped lang="less">
-
+    .bg{
+        background-image: url("../assets/image/bg.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 </style>
