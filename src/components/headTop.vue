@@ -8,7 +8,7 @@
 		<div>2222222222332</div>
 		<el-dropdown >
 			<el-button type="primary">
-				更多菜单<i class="el-icon-arrow-down el-icon--right"></i>
+				{{username}}<i class="el-icon-arrow-down el-icon--right"></i>
 			</el-button>
 			<el-dropdown-menu slot="dropdown">
 				<el-dropdown-item >首页</el-dropdown-item>
@@ -21,8 +21,20 @@
 <script>
 
 
-    export default {
-    }
+export default {
+	computed:{
+		username(){
+			return this.$store.state.user.name;
+		}
+	},
+	watch:{
+		username(val, oldVal){//普通的watch监听
+			// eslint-disable-next-line no-console
+			console.log("username: "+val, oldVal);
+		},
+	}
+
+}
 </script>
 
 <style lang="less">

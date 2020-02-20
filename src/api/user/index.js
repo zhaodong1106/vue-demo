@@ -18,6 +18,9 @@ export default {
     },
     updateById(param){
         return get('/user/updateById',param);
+    },
+    userInfo(param){
+        return get('/user/userInfo',param)
     }
 
 }

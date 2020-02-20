@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import store from '@/store'
 import Router from 'vue-router'
 //引入nprogress
 import NProgress from 'nprogress' // 进度条
@@ -71,7 +72,9 @@ router.beforeEach(((to, from, next) => {
         next()
     }
 }))
-router.afterEach(() => {
+// eslint-disable-next-line no-unused-vars
+router.afterEach((to, from, next) => {
     NProgress.done()
+    store.commit('setPath',to.path.replace("/",''))
 })
 export  default  router;

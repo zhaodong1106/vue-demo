@@ -3,7 +3,7 @@
         <el-row style="height: 100%">
             <el-col :span="4" style="min-height: 100%;background-color: #324057;">
                 <el-menu
-                        default-active="1"
+                        :default-active="$route.path.replace('/','')"
                         class="el-menu-vertical-demo"
                         background-color="#545c64"
                         text-color="#fff"
@@ -55,15 +55,59 @@
 
 <script>
     import headTop from '@/components/headTop'
+    import store from '@/store'
     export default {
-        computed: {
-            defaultActive: function(){
-                return this.$route.path.replace('/', '');
+        data(){
+            return{
+                defaultActive2: 'userList'
             }
+        },
+        computed: {
+            // defaultActive: function(){
+            //     mapState.
+            //     let path = this.$store.getters.getPath;
+            //     // eslint-disable-next-line no-console
+            //     console.log(path);
+            //     return path.replace("/",'');
+            // },
+            // ...mapGetters({
+            //     defaultActive: 'getPath'
+            //
+            //  })
+            defaultActive(){
+                 let path = store.getters.getPath;
+                // eslint-disable-next-line no-console
+                console.log(path);
+                return 'userList';
+            }
+
+
         },
         components:{
             headTop
+        },
+        watch:{
+            defaultActive(val, oldVal){//普通的watch监听
+                // eslint-disable-next-line no-console
+                console.log("defaultActive: "+val, oldVal);
+            },
         }
+        // watch: {
+        //     // eslint-disable-next-line no-unused-vars
+        //     '$route'(to, from) {
+        //         // eslint-disable-next-line no-console
+        //         console.log(to.path);
+        //         this.defaultActive = to.path.replace("/",'');
+        //         // eslint-disable-next-line no-console
+        //         console.log(this.defaultActive);
+        //     }
+        // },
+        // mounted(){
+        //     let b = window.location.href.substring(24)
+        //     this.defaultActive=bteam
+        //     // eslint-disable-next-line no-console
+        //      console.log(b);
+        // }
     }
 </script>
 

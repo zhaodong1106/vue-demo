@@ -4,14 +4,17 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
 import * as types from './types'
+import persistedState from 'vuex-persistedstate'
 
 
 Vue.use(Vuex);
 export default new Vuex.Store({
+	plugins: [persistedState()],
 	state: {
 		user: {},
 		token: null,
-		title: ''
+		title: '',
+		path: '',
 	},
 	mutations: {
 		[types.LOGIN]: (state, data) => {
@@ -24,6 +27,17 @@ export default new Vuex.Store({
 		},
 		[types.TITLE]: (state, data) => {
 			state.title = data;
+		},
+		['setPath']:(state,data) =>{
+			state.path=data;
+		},
+		['setUserInfo']:(state,data)=>{
+			state.user=data;
+		}
+	},
+	getters:{
+		getPath: state => {
+			return state.path;
 		}
 	}
 })
