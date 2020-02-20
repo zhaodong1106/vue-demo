@@ -12,7 +12,7 @@
 			</el-button>
 			<el-dropdown-menu slot="dropdown">
 				<el-dropdown-item >首页</el-dropdown-item>
-				<el-dropdown-item >退出</el-dropdown-item>
+				<el-dropdown-item @click.native="logout()">退出</el-dropdown-item>
 			</el-dropdown-menu>
 		</el-dropdown>
     </div>
@@ -20,7 +20,7 @@
 
 <script>
 
-
+import userApi from '@/api/user/index'
 export default {
 	computed:{
 		username(){
@@ -32,6 +32,18 @@ export default {
 			// eslint-disable-next-line no-console
 			console.log("username: "+val, oldVal);
 		},
+	},
+	methods:{
+		logout(){
+			userApi.logout({}).then(res=>{
+				if(res.data.code==200){
+					this.$store.commit("logout")
+				}
+				this.$router.push({path: '/login'})
+			}).catch(error=>{
+				alert(error)
+			})
+		}
 	}
 
 }

@@ -20,7 +20,10 @@ export default {
         return get('/user/updateById',param);
     },
     userInfo(param){
-        return get('/user/userInfo',param)
+        return get('/user/userInfo',param);
+    },
+    logout(param){
+        return get("/user/logout",param);
     }
 
 }
