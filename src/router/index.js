@@ -21,7 +21,7 @@ const routes = [
       name: 'login',
     },
     {
-        path:'/home',
+        path:'/',
         component:navMenu,
         name:'home',
         meta: {
@@ -45,6 +45,7 @@ const routes = [
             {
                 path:'/userList',
                 component:userList,
+                name:'用户列表',
                 meta: {
                     requireAuth: true
                 }
@@ -52,6 +53,7 @@ const routes = [
             {
                 path:'/addUser',
                 component:addUser,
+                name:'添加用户',
                 meta: {
                     requireAuth: true
                 }

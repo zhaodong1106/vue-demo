@@ -5,7 +5,7 @@
 <!--			<el-breadcrumb-item :to="{ path: '/manage' }">首页</el-breadcrumb-item>-->
 <!--			<el-breadcrumb-item v-for="(item, index) in $route.meta" :key="index">{{item}}</el-breadcrumb-item>-->
 <!--		</el-breadcrumb>-->
-		<div>2222222222332</div>
+		<div>{{pathName}}</div>
 		<el-dropdown >
 			<el-button type="primary">
 				{{username}}<i class="el-icon-arrow-down el-icon--right"></i>
@@ -25,6 +25,9 @@ export default {
 	computed:{
 		username(){
 			return this.$store.state.user.name;
+		},
+		pathName(){
+			return this.$route.name;
 		}
 	},
 	watch:{

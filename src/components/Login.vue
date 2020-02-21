@@ -71,7 +71,7 @@
                                 // eslint-disable-next-line no-console
                                 console.log(this.$store.state.user);
                                 this.$store.commit('login',res.data.accessTokenValue );
-                                 this.$router.push({path: '/home'})
+                                 this.$router.push({path: '/'})
 
                             }else{
                                 this.$message({
