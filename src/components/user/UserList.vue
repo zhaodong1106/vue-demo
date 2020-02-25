@@ -27,6 +27,7 @@
                     </div>
             </el-row>
             <el-table
+                    v-loading="loading"
                     :data="tableData"
                     style="width: 100%;margin-top: 20px;"  border>
                 <el-table-column
@@ -131,7 +132,8 @@
                     userInfo: '用户详情',
                     updateUser: '修改用户'
                 },
-                userTitle:''
+                userTitle:'',
+                loading:true
             }
         },
         components:{addUser,userInfo},
@@ -185,15 +187,16 @@
             },
             handleCurrentChange(val) {
                 this.currentPage = val;
+                this.loading=true;
                 this.getAdmin()
             },
              getAdmin(){
                     userApi.userList({pageNo: this.currentPage, pageSize: this.limit,name: this.searchDto.username,
                     email:this.searchDto.email}).then(res=> {
                         // if (res.total != null) {
-                            this.count = res.data.total;
+                            this.count = res.total;
                             this.tableData = [];
-                            res.data.data.forEach(item => {
+                            res.data.forEach(item => {
                                 const tableItem = {
                                     id: item.id,
                                     create_time: item.createTime,
@@ -201,7 +204,8 @@
                                     update_time: item.updateTime,
                                     email: item.email,
                                 }
-                                this.tableData.push(tableItem)
+                                this.tableData.push(tableItem);
+                                this.loading=false;
                             })
 
                     })

@@ -58,19 +58,19 @@
                 this.$refs[loginForm].validate(async (valid) => {
                     if (valid) {
                             userApi.login(this.loginForm).then(res=>{
-                            if (res.data.accessTokenValue != null) {
+                            if (res.accessTokenValue != null) {
                                 this.$message({
                                     type: 'success',
                                     message: '添加成功'
                                 });
-                                userApi.userInfo({}).then(res=>{
-                                    // eslint-disable-next-line no-console
-                                    console.log(res.data);
-                                    this.$store.commit('setUserInfo',res.data)
-                                })
                                 // eslint-disable-next-line no-console
                                 console.log(this.$store.state.user);
-                                this.$store.commit('login',res.data.accessTokenValue );
+                                this.$store.commit('login',{token:res.accessTokenValue,refreshToken: res.refreshTokenValue });
+                                userApi.userInfo({}).then(res=>{
+                                    // eslint-disable-next-line no-console
+                                    console.log(res);
+                                    this.$store.commit('setUserInfo',res)
+                                })
                                  this.$router.push({path: '/'})
 
                             }else{

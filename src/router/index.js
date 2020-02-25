@@ -65,7 +65,7 @@ let router = new Router({routes: routes});
 router.beforeEach(((to, from, next) => {
     NProgress.start()
     if (to.matched.some(res => res.meta.requireAuth)){
-        if(localStorage.getItem('token')){
+        if(store.state.token!=null){
             next()
         }else {
             next({path: '/login'})

@@ -13,17 +13,20 @@ export default new Vuex.Store({
 	state: {
 		user: {},
 		token: null,
+		refreshToken:null,
 		title: '',
 		path: '',
 	},
 	mutations: {
 		[types.LOGIN]: (state, data) => {
-			localStorage.setItem('token',data);
-			state.token = data;
+			// localStorage.setItem('token',data);
+			state.token = data.token;
+			state.refreshToken=data.refreshToken;
 		},
 		[types.LOGOUT]: (state) => {
-			localStorage.removeItem('token');
+			// localStorage.removeItem('token');
 			state.token = null
+			state.refreshToken=null;
 			state.user={}
 		},
 		[types.TITLE]: (state, data) => {

@@ -76,11 +76,11 @@
                 // eslint-disable-next-line no-console
                 console.log(this.id)
                 userApi.getById({id:this.id}).then(res=>{
-                    if (res.data.code == 200) {
-                        this.userForm.username=res.data.data.name;
-                        this.userForm.email=res.data.data.email;
-                        this.userForm.createTime=res.data.data.createTime;
-                        this.userForm.updateTime=res.data.data.updateTime;
+                    if (res.code == 200) {
+                        this.userForm.username=res.data.name;
+                        this.userForm.email=res.data.email;
+                        this.userForm.createTime=res.data.createTime;
+                        this.userForm.updateTime=res.data.updateTime;
                     } else {
                         this.$message({
                             type: 'error',
@@ -95,7 +95,7 @@
                 this.$refs[userForm].validate(async (valid) => {
                     if (valid) {
                             userApi.addUser(this.userForm).then(res=>{
-                            if (res.data.code==200) {
+                            if (res.code==200) {
                                 this.$message({
                                     type: 'success',
                                     message: '添加成功'
@@ -139,7 +139,7 @@
                             id: this.id
                         }
                        userApi.updateById(editdata).then(res=>{
-                            if (res.data.code==200) {
+                            if (res.code==200) {
                                 this.$message({
                                     type: 'success',
                                     message: '修改成功'

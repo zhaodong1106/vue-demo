@@ -39,7 +39,7 @@ export default {
 	methods:{
 		logout(){
 			userApi.logout({}).then(res=>{
-				if(res.data.code==200){
+				if(res.code==200){
 					this.$store.commit("logout")
 				}
 				this.$router.push({path: '/login'})
