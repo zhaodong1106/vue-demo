@@ -6,6 +6,7 @@
 <!--			<el-breadcrumb-item v-for="(item, index) in $route.meta" :key="index">{{item}}</el-breadcrumb-item>-->
 <!--		</el-breadcrumb>-->
 		<div>{{pathName}}</div>
+
 		<el-dropdown >
 			<el-button type="primary">
 				<svg-icon  icon-class="user"  class-name="icon-red"></svg-icon>
@@ -72,7 +73,9 @@ export default {
         text-align: center;
     }
 	.icon-red{
-		color:red;
+		height: 15px;
+		width: 15em;
+		color:yellow;
 	}
 
 </style>
