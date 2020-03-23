@@ -9,7 +9,8 @@
                             <el-form-item label="用户名:" prop="username" class="search-item">
                                 <el-input v-model="searchDto.username" placeholder="用户名"></el-input>
                             </el-form-item>
-                            <el-form-item label="邮箱:" prop="email" class="search-item">
+                            <el-form-item label="邮箱:" prop="email" class="search-item" >
+
                                 <el-select v-model="searchDto.email" placeholder="邮箱">
                                     <el-option label="1987589041@qq.com" value="1987589041@qq.com"></el-option>
                                     <el-option label="398424967@qq.com" value="398424967@qq.com"></el-option>
@@ -106,8 +107,8 @@
 
 <script>
     import  userApi from '@/api/user/index'
-    import addUser from '@/components/user/AddUser'
-    import userInfo from '@/components/user/UserInfo'
+    import addUser from '@/pages/user/AddUser'
+    import userInfo from '@/pages/user/UserInfo'
     export default {
         name: "UserList",
         data: function () {

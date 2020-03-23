@@ -8,6 +8,7 @@
 		<div>{{pathName}}</div>
 		<el-dropdown >
 			<el-button type="primary">
+				<svg-icon  icon-class="user"  class-name="icon-red"></svg-icon>
 				{{username}}<i class="el-icon-arrow-down el-icon--right"></i>
 			</el-button>
 			<el-dropdown-menu slot="dropdown">
@@ -70,4 +71,8 @@ export default {
 	.el-dropdown-menu__item{
         text-align: center;
     }
+	.icon-red{
+		color:red;
+	}
+
 </style>

@@ -8,12 +8,12 @@ import 'nprogress/nprogress.css' //这个样式必须引入
 
 Vue.use(Router)
 
-const navMenu = r => require.ensure([], () => r(require('@/components/NavMenu')), 'NavMenu');
-const  addShop=r => require.ensure([], () => r(require('@/components/AddShop')), 'AddShop');
-const  addStore=r => require.ensure([], () => r(require('@/components/AddStore')), 'AddStore');
-const  userList=r => require.ensure([], () => r(require('@/components/user/UserList')), 'UserList');
-const  addUser=r => require.ensure([], () => r(require('@/components/user/AddUser')), 'AddUser');
-const  login=r => require.ensure([], () => r(require('@/components/Login')), 'Login');
+const navMenu = r => require.ensure([], () => r(require('@/pages/NavMenu')), 'NavMenu');
+const  addShop=r => require.ensure([], () => r(require('@/pages/AddShop')), 'AddShop');
+const  addStore=r => require.ensure([], () => r(require('@/pages/AddStore')), 'AddStore');
+const  userList=r => require.ensure([], () => r(require('@/pages/user/UserList')), 'UserList');
+const  addUser=r => require.ensure([], () => r(require('@/pages/user/AddUser')), 'AddUser');
+const  login=r => require.ensure([], () => r(require('@/pages/Login')), 'Login');
 const routes = [
     {
       path: '/login',

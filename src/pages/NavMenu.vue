@@ -54,7 +54,7 @@
 </template>
 
 <script>
-    import headTop from '@/components/headTop'
+    import headTop from '@/pages/headTop'
     import store from '@/store'
     export default {
         data(){

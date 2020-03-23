@@ -4,6 +4,7 @@ import ElementUi from 'element-ui'
 import router from './router'
 import store from './store'
 import 'element-ui/lib/theme-chalk/index.css'
+import  './icons/index';
 // import VueRouter from 'vue-router'
 
 Vue.config.productionTip = false
